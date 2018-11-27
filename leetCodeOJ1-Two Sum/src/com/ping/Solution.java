@@ -77,7 +77,7 @@ public class Solution {
 
     public static int reverse1(int x) {
         int re = 0;
-        if (x > Integer.MAX_VALUE/10 || x < Integer.MIN_VALUE/10) {
+        if (x > Integer.MAX_VALUE / 10 || x < Integer.MIN_VALUE / 10) {
             return 0;
         }
         while (x != 0) {
@@ -85,5 +85,34 @@ public class Solution {
             x /= 10;
         }
         return re;
+    }
+
+    /**
+     * Determine whether an integer is a palindrome. An integer is a palindrome when it reads the same backward as forward.
+     * <p>
+     * Example 1:
+     * Input: 121
+     * Output: true
+     * <p>
+     * Example 2:
+     * Input: -121
+     * Output: false
+     * Explanation: From left to right, it reads -121. From right to left, it becomes 121-. Therefore it is not a palindrome.
+     * <p>
+     * Example 3:
+     * Input: 10
+     * Output: false
+     * Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
+     *
+     * @param x
+     * @return
+     */
+    public boolean isPalindrome1(int x) {
+        int a = 0, b = x;
+        while (b > 0) {
+            a = a * 10 + b % 10;
+            b /= 10;
+        }
+        return x == b;
     }
 }
