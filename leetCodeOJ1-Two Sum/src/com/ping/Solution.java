@@ -22,7 +22,7 @@ public class Solution {
 //        for (int i = 0; i < result.length; i++) {
 //            System.out.print(result[i] + "\t");
 //        }
-        System.out.println(reverse1(-1230));
+        System.out.println(romanToInt("III"));
 
     }
 
@@ -114,5 +114,39 @@ public class Solution {
             b /= 10;
         }
         return x == b;
+    }
+
+    /**
+     * I can be placed before V (5) and X (10) to make 4 and 9.   I  II  III IV V VI VII VIII  IX X
+     * X can be placed before L (50) and C (100) to make 40 and 90.
+     * C can be placed before D (500) and M (1000) to make 400 and 900.
+     *
+     * @param s
+     * @return
+     */
+    public static int romanToInt(String s) {
+        Map<Character,Integer> map = new HashMap<>();
+        map.put('I',1);
+        map.put('V',2);
+        map.put('X',10);
+        map.put('L',50);
+        map.put('C',100);
+        map.put('D',500);
+        map.put('M',1000);
+
+        int result = 0;
+        int preVal = 0;
+        for (int i = s.length()-1;i>=0;i--) {
+            char key = s.charAt(i);
+            int value = map.get(key);
+            if (value >= preVal) {
+                result += value;
+            } else {
+                result -= value;
+            }
+            preVal = value;
+        }
+
+        return result;
     }
 }
