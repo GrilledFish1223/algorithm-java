@@ -11,10 +11,11 @@ public class BST {
 
     }
 
-    public static int preValue  = Integer.MIN_VALUE;
+    public static int preValue = Integer.MIN_VALUE;
 
     /**
      * 如何判断一颗二叉树是否是搜索二叉树 中序遍历 升序就是搜索二叉树
+     *
      * @param head
      * @return
      */
@@ -24,10 +25,10 @@ public class BST {
         }
 
         boolean isLeftBst = isBST(head.left);
-        if(!isLeftBst) {
+        if (!isLeftBst) {
             return false;
         }
-        if (head.value<= preValue) {
+        if (head.value <= preValue) {
             return false;
         } else {
             preValue = head.value;
@@ -42,7 +43,7 @@ public class BST {
         }
         int preValue = Integer.MIN_VALUE;
         Stack<TreeNode> stack = new Stack<TreeNode>();
-        while(!stack.isEmpty() || head != null) {
+        while (!stack.isEmpty() || head != null) {
             if (head != null) {
                 stack.push(head);
                 head = head.left;
@@ -53,7 +54,7 @@ public class BST {
                 } else {
                     preValue = head.value;
                 }
-                head= head.right;
+                head = head.right;
             }
         }
         return true;
@@ -66,7 +67,7 @@ public class BST {
         List<TreeNode> list = new ArrayList<>();
         process(head, list);
         long preValue = Long.MIN_VALUE;
-        for (TreeNode cur: list) {
+        for (TreeNode cur : list) {
             if (preValue >= cur.value) {
                 return false;
             }
@@ -76,7 +77,7 @@ public class BST {
         return true;
     }
 
-    public static void process(TreeNode node , List<TreeNode> listNode) {
+    public static void process(TreeNode node, List<TreeNode> listNode) {
         if (node == null) {
             return;
         }
@@ -84,4 +85,22 @@ public class BST {
         listNode.add(node);
         process(node.right, listNode);
     }
+
+    public boolean isBST4(TreeNode head) {
+        return helper(head, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    public boolean helper(TreeNode head, long min, long max) {
+        if (head == null) {
+            return true;
+        }
+
+        if (head.value <= min || head.value >= max) {
+            return false;
+        }
+
+        return helper(head.left, min, head.value) && helper(head.right, head.value, max);
+    }
+
+
 }
